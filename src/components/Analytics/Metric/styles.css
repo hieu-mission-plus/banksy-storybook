@@ -1,0 +1,9 @@
+.invisible > path.domain,
+.invisible > .tick > line {
+  display: none;
+}
+
+.invisible {
+  font-size: 16px;
+  font-weight: 600;
+}

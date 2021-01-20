@@ -1,0 +1,11 @@
+.dotted-axis path {
+  fill: none;
+  stroke: #cccccc;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 10;
+  stroke-width: 2;
+}
+
+.arrowHead {
+  fill: #cccccc;
+}

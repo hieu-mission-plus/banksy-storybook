@@ -1,0 +1,31 @@
+sname,category,name,scale_type
+,,Company
+,Products,Payments
+,Products,Current Account
+,Products,Saving Account
+,Products,Lending
+,Products,Insurance
+,Products,Investments
+,Features,Digital onboarding
+,Features,Instant credit
+,Features,Card-lock
+,Features,In-app chatbot
+,Features,Account aggregation
+,Features,Budgeting and spending tools
+,Features,Marketplace
+Employees,Scale,Scale_Employees,value
+Employees,Scale,Score_Employees,score
+Funding stage,Scale,Scale_Funding stage,value
+Funding stage,Scale,Score_Funding stage,score
+Funding amount,Scale,Scale_Funding amount,value
+Funding amount,Scale,Score_Funding amount,score
+2019 revenue (in USD),Scale,Scale_2019 revenue (in USD),value
+2019 revenue (in USD),Scale,Score_2019 revenue (in USD),score
+Users,Scale,Scale_Users,value
+Users,Scale,Score_Users,score
+Geographic coverage,Scale,Scale_Geographic coverage,value
+Geographic coverage,Scale,Score_Geographic coverage,score
+App downloads,Scale,Scale_App downloads,value
+App downloads,Scale,Score_App downloads,score
+App ratings,Scale,Scale_App ratings,value
+App ratings,Scale,Score_App ratings,score
