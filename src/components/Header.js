@@ -7,6 +7,7 @@ import match from "autosuggest-highlight/match"
 
 import logo from "../images/fct-logo.svg"
 import { Context as CompaniesContext } from "../contexts/CompaniesContext"
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -72,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header = ({ setRootView, setTaxonomyView }) => {
+const Header = ({ setTaxonomyView }) => {
   const classes = useStyles()
   const {
     state: { companies },
@@ -80,9 +81,19 @@ const Header = ({ setRootView, setTaxonomyView }) => {
   } = useContext(CompaniesContext)
   const [searchTerm, setSearchTerm] = useState("")
   const [options, setOptions] = useState(null)
+  let history = useHistory();
+
+  const onPressProfile = () => {
+    history.push("/profile");
+  }
+  const onPressTaxonomy = () => {
+    history.push("/");
+  }
+  
+
   useEffect(() => {
     if (comps.map(b => b.name).includes(searchTerm)) {
-      setRootView("Profile")
+      onPressProfile()
     } else if (businessLines.map(b => b.name).includes(searchTerm)) {
       setOptions([
         ...region1s.map(region => ({
@@ -107,11 +118,11 @@ const Header = ({ setRootView, setTaxonomyView }) => {
     // horrible code - will need re-writing
     if (event.key === "Enter") { // redirect
       if (comps.map(b => b.name).includes(searchTerm)) {
-        setRootView("Profile")
+        onPressProfile()
       } else {
         businessLines.forEach(b => {
           if (searchTerm.indexOf(b.name) > -1) {
-            setRootView("Taxonomy")
+            onPressTaxonomy()
             setTaxonomyView("List")
             businessLines.forEach(b => {
               if (searchTerm.indexOf(b.name) > -1) {

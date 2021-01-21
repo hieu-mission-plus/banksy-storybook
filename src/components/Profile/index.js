@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Profile = ({ setRootView }) => {
+const Profile = () => {
   const classes = useStyles()
 
   return (
@@ -24,7 +24,7 @@ const Profile = ({ setRootView }) => {
           <Sidebar />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Navigation setRootView={setRootView} />
+          <Navigation />
         </Grid>
       </Grid>
     </div>

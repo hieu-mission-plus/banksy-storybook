@@ -15,6 +15,7 @@ import partnerships from "../../images/profile/partnerships.svg"
 import news from "../../images/profile/news.svg"
 
 import useIsMobile from "../../hooks/useIsMobile"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles({
   padding: {
@@ -69,11 +70,19 @@ const useStyles = makeStyles({
   },
 })
 
-const Navigation = ({ setRootView }) => {
+const Navigation = () => {
   const classes = useStyles()
   const [selectedTab, setSelectedTab] = useState(0)
   const isMobile = useIsMobile()
   const options = [overview, null, use_case, partnerships, news]
+  let history = useHistory();
+
+  const onPressProfile = () => {
+    history.push("/profile");
+  }
+  const onPressComparison = () => {
+    history.push("/comparison");
+  }
 
   return (
     <>
@@ -86,11 +95,11 @@ const Navigation = ({ setRootView }) => {
             >
               <Home
                 classes={{ root: classes.homeIcon }}
-                onClick={() => setRootView("Taxonomy")}
+                onClick={onPressProfile}
               />
               <Typography
                 className={classes.comparisonText}
-                onClick={() => setRootView("Comparison")}
+                onClick={onPressComparison}
               >
                 Comparison
               </Typography>

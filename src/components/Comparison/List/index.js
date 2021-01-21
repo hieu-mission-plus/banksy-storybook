@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 })
 
-const List = ({ selectedTab, setSelectedTab, setRootView }) => {
+const List = ({ selectedTab, setSelectedTab, isMobile }) => {
   const classes = useStyles()
   const {
     state: { companies, selectedIndices, capabilities, adaptabilities },
@@ -107,7 +107,7 @@ const List = ({ selectedTab, setSelectedTab, setRootView }) => {
         <AntTab label="Capability (x-axis)" id={0} />
         <AntTab label="Scale (y-axis)" id={1} />
       </Tabs>
-      <Table columns={columns} data={data} setRootView={setRootView} />
+      <Table columns={columns} data={data} />
     </>
   )
 }

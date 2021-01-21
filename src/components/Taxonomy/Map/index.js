@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 })
 
-const Map = () => {
+const Map = (props) => {
   const classes = useStyles()
   const {
     state: { activeNode, tree },

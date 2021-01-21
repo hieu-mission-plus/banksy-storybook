@@ -8,6 +8,7 @@ import {
   TableCell,
   TableRow,
 } from "@material-ui/core"
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   paper: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
   table: { width: "auto", tableLayout: "auto", minWidth: "100%" },
 })
 
-const SelectTable = ({ columns, data, setRootView }) => {
+const SelectTable = ({ columns, data }) => {
   const classes = useStyles()
 
   const {
@@ -57,6 +58,14 @@ const SelectTable = ({ columns, data, setRootView }) => {
     data,
   })
 
+  let history = useHistory();
+
+  const onPressProfile = () => {
+    history.push("/profile");
+  }
+  const onPressTaxonomy = () => {
+    history.push("/");
+  }
   return (
     <>
       <Table
@@ -89,7 +98,7 @@ const SelectTable = ({ columns, data, setRootView }) => {
             return (
               <TableRow
                 {...row.getRowProps()}
-                onClick={() => setRootView("Profile")}
+                onClick={onPressProfile}
                 className={classes.clickableRow}
                 style={{ backgroundColor: i % 2 === 0 ? "#F8FAFC" : "#FFFFFF" }}
               >
