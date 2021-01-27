@@ -15,7 +15,7 @@ import SwapIcon from "../../icons/Swap"
 import DashboardIcon from "../../icons/Dashboard"
 import ExportIcon from "../../icons/Export"
 
-import BSButton from "../shared/Button/BSButton"
+import FCTButton from "../shared/Button/FCTButton"
 import MPButtonGroup from "../shared/MPButtonGroup"
 
 import { Context as CompaniesContext } from "../../contexts/CompaniesContext"
@@ -89,7 +89,7 @@ const useStyles = makeStyles({
   },
 })
 
-const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobile: any }) => {
+const Taxonomy = ({ view, setView, isMobile }: { view: string, setView: any, isMobile: boolean }) => {
   const classes = useStyles()
   const {
     state: { selectedIndices, filteredCompanies },
@@ -116,15 +116,15 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
         <Breadcrumbs />
         <div className={isMobile ? classes.mobileSpreader : ''}>
           <MPButtonGroup>
-            <BSButton
+            <FCTButton
               variant="outlined"
               color={view === "Bubble" ? "primary" : "default"}
               startIcon={<BubbleIcon />}
               onClick={() => setView("Bubble")}
             >
               {isMobile ? "Bubble" : "Bubble view"}
-            </BSButton>
-            <BSButton
+            </FCTButton>
+            <FCTButton
               variant="outlined"
               color={view === "Map" ? "primary" : "default"}
               startIcon={<DashboardIcon />}
@@ -132,8 +132,8 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
               disabled={buttonDisabled}
             >
               {isMobile ? "Map" : "Map view"}
-            </BSButton>
-            <BSButton
+            </FCTButton>
+            <FCTButton
               variant="outlined"
               color={view === "List" ? "primary" : "default"}
               startIcon={<ListIcon />}
@@ -141,7 +141,7 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
               disabled={buttonDisabled}
             >
               {isMobile ? "List" : "List view"}
-            </BSButton>
+            </FCTButton>
           </MPButtonGroup>
           <Filters />
         </div>
@@ -178,7 +178,7 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
                 </div>
               </div>
               <div>
-                <BSButton
+                <FCTButton
                   variant="outlined"
                   color="default"
                   className={classes.button}
@@ -186,14 +186,14 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
                   onClick={() => setMapOpen(!mapOpen)}
                 >
                   {isMobile ? "Companies" : "Top companies"}
-                </BSButton>
+                </FCTButton>
               </div>
             </div>
           )}
         </div>
         {view !== "Bubble" && (
           <div className={isMobile ? classes.mobileButtons : ''}>
-            <BSButton
+            <FCTButton
               variant="outlined"
               color="default"
               className={classes.button}
@@ -201,8 +201,8 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
               onClick={onPressComparison}
             >
               Compare ({selectedIndices.length})
-            </BSButton>
-            <BSButton
+            </FCTButton>
+            <FCTButton
               variant="outlined"
               color="default"
               className={classes.button}
@@ -210,16 +210,16 @@ const Taxonomy = ({ view, setView, isMobile }: { view: any, setView: any, isMobi
               onClick={onPressAnalytics}
             >
               Analytics
-            </BSButton>
+            </FCTButton>
             {!isMobile && (
-              <BSButton
+              <FCTButton
                 variant="outlined"
                 color="default"
                 className={classes.button}
                 startIcon={!isMobile && <ExportIcon color="primary" />}
               >
                 Export
-              </BSButton>
+              </FCTButton>
             )}
           </div>
         )}
