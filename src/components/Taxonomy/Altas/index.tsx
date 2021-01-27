@@ -7,7 +7,7 @@ import Bubble from "./Bubble"
 import { Context as TaxonomyContext } from "../../../contexts/TaxonomyContext"
 import { Context as CompaniesContext } from "../../../contexts/CompaniesContext"
 
-const Atlas = ({ treeOpen, setTreeOpen, mapOpen }: { treeOpen: any, setTreeOpen: any, mapOpen: any }) => {
+const Atlas = ({ treeOpen, setTreeOpen, mapOpen }: { treeOpen: boolean, setTreeOpen: any, mapOpen: boolean }) => {
   const {
     state: { activeNode, tree },
   } = useContext(TaxonomyContext)

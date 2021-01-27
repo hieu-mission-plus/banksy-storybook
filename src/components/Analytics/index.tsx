@@ -8,7 +8,7 @@ import {
 import { KeyboardArrowLeft } from "@material-ui/icons";
 
 import Metric from "./Metric";
-import BSButton from "../shared/Button/BSButton";
+import FCTButton from "../shared/Button/FCTButton";
 import ExportIcon from "../../icons/Export";
 import Breadcrumbs from "../Breadcrumbs";
 import { useHistory } from "react-router-dom";
@@ -73,7 +73,7 @@ const useStyles = makeStyles({
 const Analytics = ({
   isMobile,
 }: {
-  isMobile: any;
+  isMobile: boolean;
 }) => {
   const classes = useStyles();
   const [yValue, setYValue] = useState("Amount");
@@ -124,14 +124,14 @@ const Analytics = ({
             onChange={(e) => setToDate(e.target.value)}
           />
           {!isMobile && (
-            <BSButton
+            <FCTButton
               className={classes.button}
               color="default"
               startIcon={<ExportIcon color="primary" />}
               variant="outlined"
             >
               Export
-            </BSButton>
+            </FCTButton>
           )}
         </div>
       </div>

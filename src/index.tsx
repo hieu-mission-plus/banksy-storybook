@@ -13,6 +13,7 @@ import { createPack } from 'react-component-pack';
 import { Routers } from "./Routers/Routers";
 import { client } from "./lib/ApolloClient";
 import MainTemplate from "./templates/MainTemplate"
+import './font/font.css'
 
 const ProviderPack = createPack(
   (props: any) => (<ApolloProvider {...props} client={client}></ApolloProvider>),

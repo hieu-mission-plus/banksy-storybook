@@ -10,7 +10,7 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state"
 
 import FilterIcon from "../../../icons/Filter"
 import Accordion from "./Accordion"
-import BSButton from "../../shared/Button/BSButton"
+import FCTButton from "../../shared/Button/FCTButton"
 
 import { Context as CompaniesContext } from "../../../contexts/CompaniesContext"
 
@@ -46,7 +46,7 @@ const Filters = () => {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {popupState => (
         <>
-          <BSButton
+          <FCTButton
             variant="outlined"
             color="default"
             className={classes.button}
@@ -54,7 +54,7 @@ const Filters = () => {
             {...bindTrigger(popupState)}
           >
             Filter
-          </BSButton>
+          </FCTButton>
           <Popover
             style={{'width': '300px'}}
             {...bindPopover(popupState)}
