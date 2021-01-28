@@ -1,39 +1,35 @@
-import React from "react"
-import {
-  makeStyles,
-} from "@material-ui/core"
-
-import sidebar from "../../images/profile/sidebar.svg"
+import React from 'react'
+import { makeStyles, Paper } from '@material-ui/core'
+import { Profile } from './Sidebar/Profile'
+import { CompanyInformation } from './Sidebar/CompanyInformation'
+import { CategoriesTags } from './Sidebar/CategoriesTags'
+import { TopCompanies } from './Sidebar/TopCompanies'
+import { dataCategoriesTags, dataCompanyInformation, dataProfileAvatar, dataTopCompanies } from './Sidebar/shared/DataMock'
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    width: "100%",
-    flex: 1,
-    position: "relative",
+    padding: 16,
+    paddingRight: 18,
+    margin: 'auto',
+    maxWidth: 400,
+    borderRadius: 5,
+    boxSizing: 'border-box',
+    border: '1px solid #E7ECF3',
+    boxShadow: '0px 3px 4px rgba(148, 163, 184, 0.05)',
+    background: 'linear-gradient(180deg, rgba(51,65,85,1) 60px, rgba(255,255,255,1) 60px)',
   },
-  background: {
-    backgroundColor: "#334155",
-    height: "60px",
-    width: "100%",
-    position: "absolute",
-    top: "0",
-    left: "0",
-  },
-  content: {
-    zIndex: 1000,
-    padding: "20px",
-  },
-  sidebar: {
-    width: "100%"
-  }
 })
 
 const Sidebar = () => {
-  const classes: any = useStyles()
+  const classes = useStyles()
 
   return (
-      <img className={classes.sidebar} src={sidebar} alt="Upbank logo" />
+    <Paper className={classes.root}>
+      <Profile data={dataProfileAvatar}></Profile>
+      <CompanyInformation data={dataCompanyInformation}></CompanyInformation>
+      <CategoriesTags data={dataCategoriesTags}></CategoriesTags>
+      <TopCompanies data={dataTopCompanies}></TopCompanies>
+    </Paper>
   )
 }
 
