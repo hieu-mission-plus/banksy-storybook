@@ -2,9 +2,9 @@ import { Tabs, TabsProps, withStyles } from "@material-ui/core";
 
 const FCTTabs = withStyles((theme) => ({
     root: {
-        border: '2px solid #E7ECF3',
-        borderRadius: 6,
-        'min-height': 0,
+        border: '1px solid #E7ECF3',
+        borderRadius: 3,
+        minHeight: 0,
         display: 'inline-flex',
     },
     indicator: {
