@@ -1,4 +1,4 @@
-import { ApolloCache, ApolloClient, ApolloLink } from '@apollo/client';
+import { ApolloClient, ApolloLink } from '@apollo/client';
 import { withClientState } from 'apollo-link-state';
 import { APOLLO_SERVER } from '../config';
 import { resolvers, defaults } from './resolvers'

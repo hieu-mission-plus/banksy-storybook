@@ -180,7 +180,6 @@ const Header = ({ setTaxonomyView }: any) => {
             onKeyDown={e => handleEnter(e)}
             onClose={(event: any, reason: any) => {
               if (reason === "select-option") {
-                const path = event.target?.firstChild?.attributes?.path?.value
                 setSearchTerm(event.target.innerText)
               }
             }}

@@ -63,9 +63,7 @@ const SelectTable = ({ columns, data }: { columns: any[], data: any }) => {
   const onPressProfile = () => {
     history.push("/profile");
   }
-  const onPressTaxonomy = () => {
-    history.push("/");
-  }
+
   return (
     <>
       <Table

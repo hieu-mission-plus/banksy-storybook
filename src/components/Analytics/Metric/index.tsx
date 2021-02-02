@@ -10,7 +10,6 @@ import {
 
 import StackedBar from "./StackedBar.d3"
 import { Context } from "../../../contexts/FundingContext"
-import { AnyARecord } from "dns"
 
 const useStyles = makeStyles({
   wrapper: {
