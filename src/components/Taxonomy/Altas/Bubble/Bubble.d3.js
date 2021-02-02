@@ -1,5 +1,5 @@
 import * as d3 from "d3"
-import { tip as d3tip } from "d3-v6-tip"
+import d3tip from '../../../../lib/d3-tip'
 import "./styles.css"
 import retailBanking from "../../../../images/label-retail-banking.svg"
 

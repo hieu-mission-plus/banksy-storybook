@@ -1,21 +1,3 @@
-import capitalMarkets from "./images/bubble/capitalMarkets.svg"
-import smeBanking from "./images/bubble/smeBanking.svg"
-import insurance from "./images/bubble/insurance.svg"
-import wealthManagement from "./images/bubble/wealthManagement.svg"
-import corporateBanking from "./images/bubble/corporateBanking.svg"
-import support from "./images/bubble/support.svg"
-import technology from "./images/bubble/technology.svg"
-import retailBanking from "./images/bubble/retailBanking.svg"
-import lendingAndCrowdfunding from "./images/bubble/lendingAndCrowdfunding.svg"
-import payments from "./images/bubble/payments.svg"
-import retailAccounts from "./images/bubble/retailAccounts.svg"
-import accountsAndSavings from "./images/bubble/accountsAndSavings.svg"
-import financialBanking from "./images/bubble/financialBanking.svg"
-import smeAccounting from "./images/bubble/smeAccounting.svg"
-import digitalChallengerBanks from "./images/bubble/digitalChallengerBanks.svg"
-import neobanks from "./images/bubble/neobanks.svg"
-import challengerBanks from "./images/bubble/challengerBanks.svg"
-
 export const tree = {
   name: "Business Line",
   children: [

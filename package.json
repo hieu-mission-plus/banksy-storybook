@@ -12,7 +12,8 @@
     "apollo-link-state": "^0.4.2",
     "autosuggest-highlight": "^3.1.1",
     "d3": "^6.2.0",
-    "d3-v6-tip": "^1.0.7",
+    "d3-collection": "^1.0.7",
+    "d3-selection": "^2.0.0",
     "graphql": "^15.4.0",
     "material-ui-flat-pagination": "^4.1.1",
     "material-ui-popup-state": "^1.7.1",
@@ -37,7 +38,11 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "off",
+      "jsx-a11y/alt-text": [0]
+    }
   },
   "browserslist": {
     "production": [

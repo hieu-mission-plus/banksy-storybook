@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react"
-import { makeStyles, Typography, IconButton } from "@material-ui/core"
-import { AccountTree } from "@material-ui/icons"
+import { makeStyles, Typography } from "@material-ui/core"
 
 import Map from "./Map"
 import List from "./List"
