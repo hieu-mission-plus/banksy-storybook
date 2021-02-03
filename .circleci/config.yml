@@ -42,18 +42,6 @@ jobs:
       - run:
           name: Deploy Storybook Production
           command: 'npm run deploy-storybook'
-      - run:
-          name: Publish package
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc | npm publish
-          
-  deploy-storybook:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - run:
-          name: Deploy Storybook UAT
-          command: npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --exit-once-uploaded
 workflows:
   version: 2
   build-and-deploy:
@@ -62,21 +50,11 @@ workflows:
           filters:
             branches:
               only:
-                - master
-                - development
-                - internal
+                - main
       - publish:
           requires:
             - build
           filters:
             branches:
               only:
-                - master
-      - deploy-storybook:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - development
-                - internal
+                - main
