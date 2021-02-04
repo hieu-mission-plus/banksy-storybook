@@ -4,7 +4,14 @@ import FCTCard from './FCTCard'
 import FCTCardHeader from './FCTCardHeader'
 import FCTCardContent from './FCTCardContent'
 import FCTCardActions from './FCTCardActions'
-import { CardProps, IconButton, Link, makeStyles, ThemeProvider } from '@material-ui/core'
+import {
+  CardProps,
+  IconButton,
+  Link,
+  makeStyles,
+  ThemeProvider,
+  Typography,
+} from '@material-ui/core'
 import theme from '../../../theme'
 import FCTButton from '../Button/FCTButton'
 import FCTIcon from '../Icon/Icon'
@@ -40,9 +47,9 @@ const CommonCardTemplate: Story<CardProps> = (args: CardProps) => {
   return (
     <ThemeProvider theme={theme}>
       <FCTCard {...args}>
-        <FCTCardHeader title="Header"></FCTCardHeader>
+        <FCTCardHeader titleElement={<Typography>Header</Typography>}></FCTCardHeader>
         <FCTCardContent>
-          <span>Content</span>
+          <Typography>Content</Typography>
         </FCTCardContent>
       </FCTCard>
     </ThemeProvider>
