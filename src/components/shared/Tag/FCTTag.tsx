@@ -37,14 +37,14 @@ const FCTTag = withStyles(theme =>
     },
     label: {
       padding: 0,
-      marginLeft: 10,
+      margin: '0px 10px',
       fontSize: 14,
       fontStyle: 'normal',
       fontWeight: 'normal',
       color: '#717688',
     },
     labelSmall: {
-      marginLeft: 8,
+      margin: '0px 8px',
       fontSize: 12,
       color: theme.palette.secondary.main,
     },
@@ -52,8 +52,7 @@ const FCTTag = withStyles(theme =>
       height: 16,
       width: 16,
       color: '#22253F',
-      marginRight: 10,
-      marginLeft: 10,
+      margin: '0px 10px 0px 0px',
       '&:hover': {
         color: '#EB5A46',
       },
@@ -61,8 +60,7 @@ const FCTTag = withStyles(theme =>
     deleteIconSmall: {
       height: 10,
       width: 10,
-      marginRight: 8,
-      marginLeft: 8,
+      margin: '0px 8px 0px 0px',
     },
     disabled: {
       background: theme.palette.grey[100],
@@ -74,12 +72,8 @@ const FCTTag = withStyles(theme =>
       },
     },
   })
-)((props: FCTTagProps) => {
+)((props: ChipProps) => {
   return <Chip {...props} />
 })
 
 export default FCTTag
-
-export interface FCTTagProps extends ChipProps {
-  onDelete(arg?: any): void
-}
