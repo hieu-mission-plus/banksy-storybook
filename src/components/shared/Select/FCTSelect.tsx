@@ -1,4 +1,4 @@
-import { Box, Checkbox, Theme } from '@material-ui/core'
+import { Box, Checkbox, Portal, Theme, ClickAwayListener } from '@material-ui/core'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Chip from '@material-ui/core/Chip'
@@ -7,7 +7,7 @@ import Flex from '../Flex/Flex'
 import { debounce } from 'lodash'
 import withStyles, { CSSProperties } from '@material-ui/core/styles/withStyles'
 import Icon from '../Icon/Icon'
-import useClickOutside from '../../../hooks/useClickOutside'
+import { useRect } from '../../../hooks/useRect'
 
 export enum ChangeType {
   SELECT = 'SELECT',
@@ -18,10 +18,24 @@ const DropDownContainer = styled('div')`
   border-radius: 5px;
   position: relative;
   border: 1px solid #e7ecf3;
+  background: #fff;
+  box-sizing: border-box;
+  min-height: 50px;
+
+  &.open {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &.sizeSmall {
+    min-height: 40px;
+  }
+
+  &.open,
   &:hover,
   &:focus {
     ${({ theme }: { theme: Theme }) => `
-      border: 1px solid ${theme.palette.primary.light};
+      border-color: ${theme.palette.primary.light};
   `}
   }
 `
@@ -50,8 +64,22 @@ const DropDownHeader = styled('div')`
   }
 `
 const DropDownListContainer = styled('div')`
-  padding: 10px;
-  padding-top: 0;
+  ${({ theme }: { theme: Theme }) => `
+  padding: 0;
+  background: #fff;
+  border: 1px solid ${theme.palette.primary.light};
+  border-top: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  &:hover: {  
+    border-color: ${theme.palette.primary.light};
+  }
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+`}}
 `
 
 const DropDownList = styled('ul')`
@@ -62,14 +90,13 @@ const DropDownList = styled('ul')`
   overflow-x: hidden;
 
   &::-webkit-scrollbar {
-    width: 3px;
+    width: 8px;
   }
 
   &::-webkit-scrollbar-thumb {
     ${({ theme }: { theme: Theme }) => `
-    width: 100%;
     background: ${theme.palette.primary.main};
-    border-radius: 3px;
+    border-right: 5px white solid;
     `}
   }
 
@@ -98,7 +125,7 @@ const DropDownListInput = styled('input').attrs(() => ({
   padding-left: 8px;
   width: 100%;
   box-sizing: border-box;
-  background: ${theme.palette.grey[100]};
+  background: #f5f5f5;
   border: 0;
   outline: 0;
   &::placeholder {
@@ -109,17 +136,17 @@ const DropDownListInput = styled('input').attrs(() => ({
 
 const DropDownListInputContainer = styled('div')`
   padding: 10px;
+  margin: 0 10px;
   background: #f5f5f5;
   display: flex;
   align-items: center;
   border-radius: 3px;
 `
 
-const ChipItem = withStyles({
+export const ChipItem = withStyles({
   root: {
     borderRadius: '3px',
     zIndex: 1,
-    margin: 2,
   },
   deleteIcon: {
     width: 10,
@@ -135,14 +162,21 @@ const DropDownSelectedList = ({
   list = [],
   onDelete,
   placeHolder = 'Select',
+  format = (item: string, onDelete: () => void) => (
+    <ChipItem label={item} size="small" onDelete={onDelete} />
+  ),
   ...props
 }: DropDownSelectedListProps) => (
-  <Flex flexWrap="wrap" minHeight={24} lineHeight={'24px'}>
-    {list?.length > 0
-      ? list?.map(item => (
-          <ChipItem key={item} label={item} size="small" onDelete={() => onDelete(item)} />
-        ))
-      : placeHolder}
+  <Flex flexWrap="wrap" minHeight={24} margin={'-2px'}>
+    {list?.length > 0 ? (
+      list?.map((item, index) => (
+        <Box key={`${item}-${index}`} lineHeight={'24px'} maxHeight={'24px'} margin={'0 1px 2px'}>
+          {format(item, () => onDelete(item))}
+        </Box>
+      ))
+    ) : (
+      <Box lineHeight={'26px'}>{placeHolder}</Box>
+    )}
   </Flex>
 )
 
@@ -158,16 +192,20 @@ const FCTSelect = ({
   onChange,
   required,
   size = 'small',
+  format,
   ...props
 }: FCTSelectProps) => {
+  // TODO: Implement Scroll Strategy
+
   const wrapperRef = React.useRef<HTMLDivElement>(null)
-  
+  const dropdownRef = React.useRef<HTMLDivElement>(null)
+
+  const position = useRect(wrapperRef)
+
   const [isTouched, setIsTouched] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   // Keep state of search string
   const [searchValue, setSearchValue] = useState('')
-
-  useClickOutside(wrapperRef, () => setIsOpen(false))
 
   const toggling = () => setIsOpen(!isDisabled && !isOpen)
 
@@ -204,38 +242,58 @@ const FCTSelect = ({
   } as CSSProperties
 
   return (
-    <DropDownContainer style={containerStyle} onMouseUp={() => setIsTouched(true)} ref={wrapperRef}>
-      <DropDownLabel>
-        {props.label}
-        {required && ' *'}
-      </DropDownLabel>
-      <DropDownHeader onClick={toggling} className={size === 'small' ? 'sizeSmall' : undefined}>
-        <DropDownSelectedList
-          list={values}
-          onDelete={item => deselectItem(values, item)}
-          placeHolder={placeHolder}
-        />
-        <Icon name="arrowdown" />
-      </DropDownHeader>
-      {isOpen && (
-        <DropDownListContainer>
-          {isSearchable && (
-            <DropDownListInputContainer>
-              <Icon name="search" color={theme.palette.grey[400]} />
-              <DropDownListInput value={searchValue} onChange={handleInputChange} />
-            </DropDownListInputContainer>
-          )}
-          <DropDownList>
-            {options.map(opt => (
-              <ListItem key={opt.value} onClick={() => toggleItem(values, opt.value)}>
-                {isMultiple && <Checkbox color="primary" checked={values.includes(opt.value)} />}
-                <Box style={{ padding: 10, paddingLeft: isMultiple ? 0 : 10 }}>{opt.label}</Box>
-              </ListItem>
-            ))}
-          </DropDownList>
-        </DropDownListContainer>
-      )}
-    </DropDownContainer>
+    <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+      <DropDownContainer
+        ref={wrapperRef}
+        style={containerStyle}
+        onMouseUp={() => setIsTouched(true)}
+        className={`${size === 'small' ? 'sizeSmall' : ''} ${isOpen ? 'open' : ''} `}
+      >
+        <DropDownLabel>
+          {props.label}
+          {required && ' *'}
+        </DropDownLabel>
+        <DropDownHeader onClick={toggling} className={`${size === 'small' ? 'sizeSmall' : ''}`}>
+          <DropDownSelectedList
+            list={values}
+            onDelete={item => deselectItem(values, item)}
+            placeHolder={placeHolder}
+            format={format}
+          />
+          <Box>
+            <Icon name="arrowdown" width={12} height={12} />
+          </Box>
+        </DropDownHeader>
+        {isOpen && (
+          <Portal container={document.getElementById('root')}>
+            <DropDownListContainer
+              ref={dropdownRef}
+              style={{
+                width: position.width,
+                transform: `translate(${position.left}px, ${position.top + position.height}px`,
+              }}
+            >
+              {isSearchable && (
+                <DropDownListInputContainer>
+                  <Icon name="search" color={theme.palette.grey[400]} />
+                  <DropDownListInput value={searchValue} onChange={handleInputChange} />
+                </DropDownListInputContainer>
+              )}
+              <DropDownList>
+                {options.map(opt => (
+                  <ListItem key={opt.value} onClick={() => toggleItem(values, opt.value)}>
+                    {isMultiple && (
+                      <Checkbox color="primary" checked={values.includes(opt.value)} />
+                    )}
+                    <Box style={{ padding: 10, paddingLeft: isMultiple ? 0 : 10 }}>{opt.label}</Box>
+                  </ListItem>
+                ))}
+              </DropDownList>
+            </DropDownListContainer>
+          </Portal>
+        )}
+      </DropDownContainer>
+     </ClickAwayListener>
   )
 }
 
@@ -247,7 +305,6 @@ export type FCTSelectProps = {
   setValues(v: string[]): void
   label: string
   options: FCTOption[]
-  placeHolder?: string
   isMultiple?: boolean
   isSearchable?: boolean
   isDisabled?: boolean
@@ -255,7 +312,7 @@ export type FCTSelectProps = {
   onFilter(keyword: string): void
   isError?: boolean
   required?: boolean
-}
+} & Pick<DropDownSelectedListProps, 'onDelete' | 'placeHolder' | 'format'>
 
 export type FCTOption = {
   value: string
@@ -266,4 +323,5 @@ export type DropDownSelectedListProps = {
   list: string[]
   onDelete(v: string): void
   placeHolder?: string
+  format?(item: string, onDelete: () => void): React.ReactNode
 }

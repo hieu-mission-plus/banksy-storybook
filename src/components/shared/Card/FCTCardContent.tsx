@@ -10,8 +10,10 @@ const FCTCardContent = withStyles(theme => ({
   },
   root: {
     padding: '32px 16px',
-    fontSize: 14,
-    fontWeight: 400,
+    '&  *': {
+      fontSize: 14,
+      fontWeight: 400,
+    },
   },
 }))((props: CardContentProps) => {
   return <CardContent {...props}></CardContent>
