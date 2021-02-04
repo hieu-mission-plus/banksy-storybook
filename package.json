@@ -7,6 +7,7 @@
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "@types/resize-observer-browser": "^0.1.5",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-link": "^1.2.14",
     "apollo-link-state": "^0.4.2",
@@ -43,7 +44,9 @@
     ],
     "rules": {
       "react-hooks/exhaustive-deps": "off",
-      "jsx-a11y/alt-text": [0]
+      "jsx-a11y/alt-text": [
+        0
+      ]
     }
   },
   "browserslist": {
@@ -82,12 +85,12 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-table": "^7.0.28",
+    "@types/styled-components": "^5.1.7",
     "babel-jest": "^26.6.3",
     "enzyme": "^3.11.0",
     "husky": "^5.0.6",
     "jest": "26.6.0",
     "prettier": "2.2.1",
-    "typescript": "^4.1.3",
-    "@types/styled-components": "^5.1.7"
+    "typescript": "^4.1.3"
   }
 }
